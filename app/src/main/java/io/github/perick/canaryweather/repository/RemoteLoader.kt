@@ -14,7 +14,7 @@ object RemoteLoader {
             val response = request.getForecastWeather(
                 forecastWeatherRequest.lat,
                 forecastWeatherRequest.lng,
-                forecastWeatherRequest.daysPeriod,
+                listOf("minutely", "hourly"),
                 forecastWeatherRequest.apiKey
             )
             // Check if response was successful.
