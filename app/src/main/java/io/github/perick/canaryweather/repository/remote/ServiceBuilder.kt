@@ -1,4 +1,4 @@
-package io.github.perick.canaryweather.repository
+package io.github.perick.canaryweather.repository.remote
 
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient

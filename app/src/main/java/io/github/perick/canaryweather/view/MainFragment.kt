@@ -7,15 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import io.github.perick.canaryweather.CanaryApplication
 import io.github.perick.canaryweather.databinding.MainFragmentBinding
 import io.github.perick.canaryweather.viewmodel.MainViewModel
 import io.github.perick.canaryweather.repository.ForecastWeatherRequest
+import io.github.perick.canaryweather.viewmodel.MainViewModelFactory
 
 class MainFragment : Fragment() {
 
     val API_KEY = "5f7ea4896cc3a871301c0c09d04a04b2"
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels{
+        MainViewModelFactory((requireActivity().application as CanaryApplication).weatherRepository)
+    }
 
     private var _binding: MainFragmentBinding? = null
     // This property is only valid between onCreateView and
@@ -45,6 +49,14 @@ class MainFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.forecastWeather.observe(viewLifecycleOwner, {
             Toast.makeText(requireContext(), "YEEE", Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel.allWeathers.observe(viewLifecycleOwner, {
+            if(it.size > 0) {
+                val weather = it[0]
+                binding.tvWeather.text = weather.main
+            }
+
         })
 
         viewModel.apiError.observe(viewLifecycleOwner, {

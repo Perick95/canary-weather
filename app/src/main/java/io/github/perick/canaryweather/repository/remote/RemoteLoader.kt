@@ -1,7 +1,9 @@
-package io.github.perick.canaryweather.repository
+package io.github.perick.canaryweather.repository.remote
 
 import android.util.Log
 import com.squareup.moshi.Moshi
+import io.github.perick.canaryweather.repository.ForecastWeatherRequest
+import io.github.perick.canaryweather.repository.ForecastWeatherResponse
 
 object RemoteLoader {
 
