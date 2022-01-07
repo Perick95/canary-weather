@@ -15,4 +15,7 @@ interface DayWeatherDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertDayWeather(reservation: DayWeather)
+
+    @Query("DELETE FROM day_weather_table")
+    suspend fun deleteAll()
 }

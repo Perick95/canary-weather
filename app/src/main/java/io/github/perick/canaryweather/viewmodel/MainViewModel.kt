@@ -29,8 +29,10 @@ class MainViewModel(private val weatherRepository: WeatherRepository) : ViewMode
             when (result) {
                 is ResultWrapper.Success -> {
                     val value = result.value
-                    val weather = value.daily[0].weather[0]
-                    insertDayWeather(DayWeather(weather.id, weather.main, weather.description))
+                    weatherRepository.deleteAll()
+                    value.daily.forEach {
+                        insertDayWeather(DayWeather(it.dt, it.weather[0].main, it.weather[0].description))
+                    }
                     forecastWeather.postValue(value)
                 }
                 is ResultWrapper.GenericError -> {

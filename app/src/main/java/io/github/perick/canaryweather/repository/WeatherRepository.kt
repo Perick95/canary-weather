@@ -24,6 +24,11 @@ class WeatherRepository(private val dayWeatherDao: DayWeatherDao) {
         dayWeatherDao.insertDayWeather(dayWeather)
     }
 
+    suspend fun deleteAll() {
+        dayWeatherDao.deleteAll()
+    }
+
+
     suspend fun getForecastWeather(forecastWeatherRequest: ForecastWeatherRequest): ResultWrapper<ForecastWeatherResponse> {
         return RemoteHelper.safeApiCall(Dispatchers.IO) {
             RemoteLoader.getForecastWeather(forecastWeatherRequest)

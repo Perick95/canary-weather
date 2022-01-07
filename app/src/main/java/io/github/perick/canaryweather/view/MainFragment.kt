@@ -55,6 +55,8 @@ class MainFragment : Fragment() {
             if(it.size > 0) {
                 val weather = it[0]
                 binding.tvWeather.text = weather.main
+
+                binding.viewpager.adapter = ViewPagerAdapter(this, it.map { dayWeather -> dayWeather.idWeather })
             }
 
         })
