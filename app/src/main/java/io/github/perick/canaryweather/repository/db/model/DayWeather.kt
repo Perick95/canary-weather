@@ -16,5 +16,8 @@ data class DayWeather(
     @ColumnInfo(name = "description")
     val description: String,
 
+    @ColumnInfo(name = "degree")
+    val degree: Int,
+
     @PrimaryKey(autoGenerate = true) val id: Int = 0
 )

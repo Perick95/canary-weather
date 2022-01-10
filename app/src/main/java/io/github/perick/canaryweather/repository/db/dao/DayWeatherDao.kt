@@ -13,6 +13,9 @@ interface DayWeatherDao {
     @Query("SELECT * FROM day_weather_table")
     fun getAllWeather(): Flow<List<DayWeather>>
 
+    @Query("SELECT * FROM day_weather_table ORDER BY id_weather_detail")
+    fun getAllWeatherOrdered(): Flow<List<DayWeather>>
+
     @Query("SELECT * FROM day_weather_table WHERE id_weather_detail = :idWeather")
     fun getWeather(idWeather: Long): Flow<DayWeather>
 

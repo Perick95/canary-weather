@@ -1,5 +1,6 @@
 package io.github.perick.canaryweather.view
 
+import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +14,9 @@ import io.github.perick.canaryweather.R
 import io.github.perick.canaryweather.databinding.MainFragmentBinding
 import io.github.perick.canaryweather.databinding.WeatherFragmentBinding
 import io.github.perick.canaryweather.viewmodel.*
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
 
 class WeatherFragment(val dayTimestamp: Long) : Fragment() {
 
@@ -37,7 +41,6 @@ class WeatherFragment(val dayTimestamp: Long) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tectview.text = dayTimestamp.toString()
         viewModelStore = ViewModelProvider(requireActivity())[ViewModelStore::class.java]
 
         observeViewModel()
@@ -48,7 +51,11 @@ class WeatherFragment(val dayTimestamp: Long) : Fragment() {
     private fun observeViewModel() {
         viewModel.weather.observe(viewLifecycleOwner, { dayWeather ->
             dayWeather?.let {
-                binding.tectview.text = it.description
+                binding.tvDate.text = getDateString(it.idWeatherDetail)
+                binding.tvMainWeather.text = it.main
+                binding.tvDescription.text = it.description
+                //make the temperature conversation from kelvin to degree
+                binding.tvDegree.text = (it.degree - 273).toString() + "°"
 
                 binding.btDetail.setOnClickListener { view ->
                     //FIXME replace with navigation component
@@ -61,6 +68,13 @@ class WeatherFragment(val dayTimestamp: Long) : Fragment() {
             }
 
         })
+    }
+
+    private fun getDateString(epoch: Long): String {
+        val epochMilliseconds = (epoch.toString().plus("000")).toLong()
+//        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        val sdf = SimpleDateFormat("EEEE dd MMMM ")
+        return sdf.format(Date(epochMilliseconds))
     }
 
     override fun onDestroyView() {

@@ -15,7 +15,7 @@ class DayWeatherRepository(private val dayWeatherDao: DayWeatherDao) {
 
     // Room executes all queries on a separate thread.
     // Observed Flow will notify the observer when the data has changed.
-    val allWeather: Flow<List<DayWeather>> = dayWeatherDao.getAllWeather()
+    val allWeather: Flow<List<DayWeather>> = dayWeatherDao.getAllWeatherOrdered()
 
 
 

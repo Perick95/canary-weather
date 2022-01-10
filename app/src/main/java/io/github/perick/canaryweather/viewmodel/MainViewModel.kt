@@ -34,7 +34,8 @@ class MainViewModel(
             when (result) {
                 is ResultWrapper.Success -> {
                     val value = result.value
-//                    dayWeatherRepository.deleteAll()
+                    dayWeatherRepository.deleteAll()
+                    dayWeatherDetailRepository.deleteAll()
                     value.daily.forEach {
                         insertDayWeatherDetail(
                             DayWeatherDetail(
@@ -42,7 +43,7 @@ class MainViewModel(
                                 it.dewPoint, it.windSpeed, it.windDeg, it.windGust, it.clouds, it.pop, it.rain, it.snow, it.uvi
                             )
                         )
-                        insertDayWeather(DayWeather(it.dt, it.weather[0].main, it.weather[0].description))
+                        insertDayWeather(DayWeather(it.dt, it.weather[0].main, it.weather[0].description, it.temp.day.toInt()))
                     }
                     forecastWeather.postValue(value)
                 }
