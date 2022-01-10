@@ -14,7 +14,7 @@ interface DayWeatherDetailDao {
     fun getAllWeatherDetail(): Flow<List<DayWeatherDetail>>
 
     @Query("SELECT * FROM day_weather_detail_table WHERE id_weather_detail = :idWeatherDetail")
-    fun getWeatherDetail(idWeatherDetail: Long): Flow<DayWeatherDetail>
+    fun getWeatherDetail(idWeatherDetail: Long): DayWeatherDetail
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertDayWeather(dayWeatherDetail: DayWeatherDetail)

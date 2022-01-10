@@ -17,7 +17,7 @@ class DayWeatherDetailRepository(private val dayWeatherDetailDao: DayWeatherDeta
         dayWeatherDetailDao.deleteAll()
     }
 
-    fun getWeatherDetail(weatherDetailId: Long) : Flow<DayWeatherDetail> {
+    fun getWeatherDetail(weatherDetailId: Long) : DayWeatherDetail {
         return dayWeatherDetailDao.getWeatherDetail(weatherDetailId)
     }
 }

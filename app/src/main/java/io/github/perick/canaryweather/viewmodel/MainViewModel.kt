@@ -34,7 +34,7 @@ class MainViewModel(
             when (result) {
                 is ResultWrapper.Success -> {
                     val value = result.value
-                    dayWeatherRepository.deleteAll()
+//                    dayWeatherRepository.deleteAll()
                     value.daily.forEach {
                         insertDayWeatherDetail(
                             DayWeatherDetail(

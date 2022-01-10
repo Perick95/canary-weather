@@ -12,16 +12,15 @@ import io.github.perick.canaryweather.CanaryApplication
 import io.github.perick.canaryweather.R
 import io.github.perick.canaryweather.databinding.MainFragmentBinding
 import io.github.perick.canaryweather.databinding.WeatherFragmentBinding
-import io.github.perick.canaryweather.viewmodel.MainViewModel
-import io.github.perick.canaryweather.viewmodel.MainViewModelFactory
-import io.github.perick.canaryweather.viewmodel.WeatherViewModel
-import io.github.perick.canaryweather.viewmodel.WeatherViewModelFactory
+import io.github.perick.canaryweather.viewmodel.*
 
 class WeatherFragment(val dayTimestamp: Long) : Fragment() {
 
     private val viewModel: WeatherViewModel by viewModels {
         WeatherViewModelFactory(dayTimestamp, (requireActivity().application as CanaryApplication).weatherRepository)
     }
+
+    private lateinit var viewModelStore: ViewModelStore
 
     private var _binding: WeatherFragmentBinding? = null
     // This property is only valid between onCreateView and
@@ -39,17 +38,21 @@ class WeatherFragment(val dayTimestamp: Long) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tectview.text = dayTimestamp.toString()
+        viewModelStore = ViewModelProvider(requireActivity())[ViewModelStore::class.java]
 
         observeViewModel()
     }
+
+
 
     private fun observeViewModel() {
         viewModel.weather.observe(viewLifecycleOwner, { dayWeather ->
             dayWeather?.let {
                 binding.tectview.text = it.description
 
-                binding.btDetail.setOnClickListener {
+                binding.btDetail.setOnClickListener { view ->
                     //FIXME replace with navigation component
+                    viewModelStore.weatherIdSelected.postValue(it.idWeatherDetail)
                     (requireActivity() as MainActivity).supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container_view, WeatherDetailFragment())
                         .addToBackStack(null)

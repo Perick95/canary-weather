@@ -58,6 +58,10 @@ class MainFragment : Fragment() {
         }
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,8 +72,6 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        observeViewModel()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
         if (allPermissionsGranted()) {
@@ -77,6 +79,9 @@ class MainFragment : Fragment() {
         } else {
             requestMultiplePermissionsLauncher.launch(REQUIRED_PERMISSIONS)
         }
+
+        observeViewModel()
+
 
     }
 
@@ -112,7 +117,6 @@ class MainFragment : Fragment() {
         }
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
-//                viewModel.getForecastWeather(ForecastWeatherRequest("35", "139", "7", API_KEY))
                 viewModel.getForecastWeather(
                     ForecastWeatherRequest(
                         location?.latitude.toString(), location?.longitude.toString(), "7",
