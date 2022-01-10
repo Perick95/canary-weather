@@ -1,6 +1,6 @@
 package io.github.perick.canaryweather.repository.remote
 
-import io.github.perick.canaryweather.repository.ForecastWeatherResponse
+import io.github.perick.canaryweather.repository.remote.model.ForecastWeatherResponse
 import retrofit2.Response
 import retrofit2.http.*
 

@@ -1,4 +1,4 @@
-package io.github.perick.canaryweather.repository
+package io.github.perick.canaryweather.repository.remote
 
 /**
  * sealed class for all response from repository to the viewModel

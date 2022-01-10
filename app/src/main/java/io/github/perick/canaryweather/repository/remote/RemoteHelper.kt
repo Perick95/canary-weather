@@ -1,6 +1,5 @@
 package io.github.perick.canaryweather.repository.remote
 
-import io.github.perick.canaryweather.repository.ResultWrapper
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 

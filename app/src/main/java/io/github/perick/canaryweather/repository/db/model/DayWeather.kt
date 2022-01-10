@@ -1,4 +1,4 @@
-package io.github.perick.canaryweather.repository.db
+package io.github.perick.canaryweather.repository.db.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -7,9 +7,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "day_weather_table")
 data class DayWeather(
 
-    @PrimaryKey
-    @ColumnInfo(name = "id_weather")
-    val idWeather: Long,
+    @ColumnInfo(name = "id_weather_detail")
+    val idWeatherDetail: Long,
 
     @ColumnInfo(name = "main")
     val main: String,
@@ -17,4 +16,5 @@ data class DayWeather(
     @ColumnInfo(name = "description")
     val description: String,
 
+    @PrimaryKey(autoGenerate = true) val id: Int = 0
 )

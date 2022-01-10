@@ -1,7 +1,7 @@
-package io.github.perick.canaryweather.repository
+package io.github.perick.canaryweather.repository.remote.model
 data class ForecastWeatherResponse (
-    val lat: Long,
-    val lon: Long,
+    val lat: Double,
+    val lon: Double,
     val timezone: String,
     val timezoneOffset: Long,
     val current: Current,
@@ -14,14 +14,14 @@ data class Current (
     val sunset: Long,
     val temp: Double,
     val feelsLike: Double,
-    val pressure: Long,
-    val humidity: Long,
+    val pressure: Double,
+    val humidity: Double,
     val dewPoint: Double,
-    val uvi: Long,
-    val clouds: Long,
-    val visibility: Long,
+    val uvi: Double,
+    val clouds: Double,
+    val visibility: Double,
     val windSpeed: Double,
-    val windDeg: Long,
+    val windDeg: Double,
     val windGust: Double,
     val weather: List<Weather>
 )
@@ -35,18 +35,18 @@ data class Daily (
     val moonPhase: Double,
     val temp: Temp,
     val feelsLike: FeelsLike,
-    val pressure: Long,
-    val humidity: Long,
+    val pressure: Double,
+    val humidity: Double,
     val dewPoint: Double,
     val windSpeed: Double,
-    val windDeg: Long,
+    val windDeg: Double,
     val windGust: Double,
     val weather: List<Weather>,
-    val clouds: Long,
+    val clouds: Double,
     val pop: Double,
     val rain: Double? = null,
     val snow: Double? = null,
-    val uvi: Double
+    val uvi: Double? = null
 )
 data class FeelsLike (
     val day: Double,

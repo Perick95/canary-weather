@@ -1,4 +1,4 @@
-package io.github.perick.canaryweather.repository
+package io.github.perick.canaryweather.repository.remote.model
 
 /**
  * object with all the parameter for the weather forecast request
