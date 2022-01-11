@@ -57,9 +57,10 @@ class WeatherFragment(val dayTimestamp: Long) : Fragment() {
                     //FIXME replace with navigation component
                     viewModelStore.weatherIdSelected.postValue(it.idWeatherDetail)
                     (requireActivity() as MainActivity).supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container_view, WeatherDetailFragment())
-                        .addToBackStack(null)
-                        .setCustomAnimations(R.anim.from_left, R.anim.to_right, R.anim.from_right, R.anim.to_left)
+                        .setCustomAnimations(R.anim.from_bottom, R.anim.to_top, R.anim.from_top, R.anim.to_bottom)
+//                        .replace(R.id.fragment_container_view, WeatherDetailFragment())
+                        .replace(R.id.fragment_container_view, WeatherDetailFragment(), "TAG")
+                        .addToBackStack("TAG")
                         .commit()
                 }
             }
