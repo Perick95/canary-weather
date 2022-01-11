@@ -24,10 +24,6 @@ import io.github.perick.canaryweather.viewmodel.MainViewModelFactory
 
 class MainFragment : Fragment() {
 
-    //TODO move api key await from here in a production environment
-    val API_KEY = "5f7ea4896cc3a871301c0c09d04a04b2"
-    private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
-
     private val viewModel: MainViewModel by viewModels {
         MainViewModelFactory(
             (requireActivity().application as CanaryApplication).weatherRepository, (requireActivity().application as
@@ -40,23 +36,6 @@ class MainFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
-
-    private val requestMultiplePermissionsLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-            var isPermissionGranted = true
-            permissions.entries.forEach {
-                Log.e("DEBUG", "${it.key} = ${it.value}")
-                isPermissionGranted = isPermissionGranted && it.value
-            }
-
-            if (isPermissionGranted) {
-                retrieveLocation()
-            } else {
-                Toast.makeText(requireContext(), "Permission denied", Toast.LENGTH_SHORT).show()
-            }
-        }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,13 +52,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
-        if (allPermissionsGranted()) {
-            retrieveLocation()
-        } else {
-            requestMultiplePermissionsLauncher.launch(REQUIRED_PERMISSIONS)
-        }
 
         observeViewModel()
 
@@ -103,35 +76,7 @@ class MainFragment : Fragment() {
         })
     }
 
-    //    @RequiresPermission(anyOf = ["android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"])
-    private fun retrieveLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            requestMultiplePermissionsLauncher.launch(REQUIRED_PERMISSIONS)
-            return
-        }
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: Location? ->
-                viewModel.getForecastWeather(
-                    ForecastWeatherRequest(
-                        location?.latitude.toString(), location?.longitude.toString(), "7",
-                        API_KEY
-                    )
-                )
-            }
-    }
 
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(
-            requireContext(), it
-        ) == PackageManager.PERMISSION_GRANTED
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
