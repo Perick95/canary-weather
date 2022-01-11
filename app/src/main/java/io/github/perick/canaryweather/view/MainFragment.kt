@@ -1,25 +1,15 @@
 package io.github.perick.canaryweather.view
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import io.github.perick.canaryweather.CanaryApplication
 import io.github.perick.canaryweather.databinding.MainFragmentBinding
 import io.github.perick.canaryweather.viewmodel.MainViewModel
-import io.github.perick.canaryweather.repository.remote.model.ForecastWeatherRequest
+import io.github.perick.canaryweather.view.adapter.ViewPagerAdapter
 import io.github.perick.canaryweather.viewmodel.MainViewModelFactory
 
 class MainFragment : Fragment() {

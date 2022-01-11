@@ -1,7 +1,8 @@
-package io.github.perick.canaryweather.view
+package io.github.perick.canaryweather.view.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import io.github.perick.canaryweather.view.WeatherFragment
 
 class ViewPagerAdapter(fragment: Fragment, val timestampsItem: List<Long>) : FragmentStateAdapter(fragment) {
 
