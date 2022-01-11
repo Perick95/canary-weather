@@ -1,6 +1,5 @@
 package io.github.perick.canaryweather.view
 
-import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,14 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import io.github.perick.canaryweather.CanaryApplication
 import io.github.perick.canaryweather.R
-import io.github.perick.canaryweather.databinding.MainFragmentBinding
 import io.github.perick.canaryweather.databinding.WeatherFragmentBinding
 import io.github.perick.canaryweather.viewmodel.*
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
 
 class WeatherFragment(val dayTimestamp: Long) : Fragment() {
@@ -63,6 +59,7 @@ class WeatherFragment(val dayTimestamp: Long) : Fragment() {
                     (requireActivity() as MainActivity).supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container_view, WeatherDetailFragment())
                         .addToBackStack(null)
+                        .setCustomAnimations(R.anim.from_left, R.anim.to_right, R.anim.from_right, R.anim.to_left)
                         .commit()
                 }
             }

@@ -1,6 +1,7 @@
 package io.github.perick.canaryweather.repository
 
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
 import io.github.perick.canaryweather.repository.db.model.DayWeather
 import io.github.perick.canaryweather.repository.db.dao.DayWeatherDao
 import io.github.perick.canaryweather.repository.remote.model.ForecastWeatherRequest

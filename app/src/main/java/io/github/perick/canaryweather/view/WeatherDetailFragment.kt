@@ -15,6 +15,8 @@ import io.github.perick.canaryweather.viewmodel.ViewModelStore
 import io.github.perick.canaryweather.viewmodel.WeatherDetailViewModel
 import io.github.perick.canaryweather.viewmodel.WeatherDetailViewModelFactory
 import io.github.perick.canaryweather.viewmodel.WeatherViewModelFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 class WeatherDetailFragment : Fragment() {
 
@@ -52,10 +54,29 @@ class WeatherDetailFragment : Fragment() {
 
         viewModel.weatherDetail.observe(viewLifecycleOwner, { detail ->
             detail?.let {
-                binding.tvTest.text = it.dt.toString()
+                binding.tvDate.text = getDateString(it.dt)
+                binding.tvSunrise.text = getString(R.string.sunrise, getHourString(it.sunrise))
+                binding.tvSunset.text = getString(R.string.sunset, getHourString(it.sunset))
+                binding.tvMoonrise.text = getString(R.string.moonrise, getHourString(it.moonrise))
+                binding.tvMoonset.text = getString(R.string.moonset, getHourString(it.moonset))
+                binding.tvPressure.text = getString(R.string.pressure, it.pressure.toString())
+                binding.tvHumidity.text = getString(R.string.humidity, it.humidity.toString())
+                binding.tvWindSpeed.text = getString(R.string.wind_speed, it.windSpeed.toString())
             }
 
         })
+    }
+
+    private fun getDateString(epoch: Long): String {
+        val epochMilliseconds = (epoch.toString().plus("000")).toLong()
+        val sdf = SimpleDateFormat("EEEE dd MMMM ")
+        return sdf.format(Date(epochMilliseconds))
+    }
+
+    private fun getHourString(epoch: Long): String {
+        val epochMilliseconds = (epoch.toString().plus("000")).toLong()
+        val sdf = SimpleDateFormat("HH:mm")
+        return sdf.format(Date(epochMilliseconds))
     }
 
 

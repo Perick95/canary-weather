@@ -24,6 +24,7 @@ import io.github.perick.canaryweather.viewmodel.MainViewModelFactory
 
 class MainFragment : Fragment() {
 
+    //TODO move api key await from here in a production environment
     val API_KEY = "5f7ea4896cc3a871301c0c09d04a04b2"
     private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
 
@@ -87,7 +88,7 @@ class MainFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.forecastWeather.observe(viewLifecycleOwner, {
-            Toast.makeText(requireContext(), "YEEE", Toast.LENGTH_SHORT).show()
+
         })
 
         viewModel.allWeathers.observe(viewLifecycleOwner, {
@@ -98,7 +99,7 @@ class MainFragment : Fragment() {
         })
 
         viewModel.apiError.observe(viewLifecycleOwner, {
-            Toast.makeText(requireContext(), "ERROR", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(requireContext(), "ERROR", Toast.LENGTH_SHORT).show()
         })
     }
 

@@ -2,4 +2,11 @@
     <string name="app_name">CanaryWeather</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sunrise">Sunrise: %s</string>
+    <string name="sunset">Sunset: %s</string>
+    <string name="moonrise">Moonrise: %s</string>
+    <string name="moonset">Moonset: %s</string>
+    <string name="pressure">Pressure: %s</string>
+    <string name="humidity">Humidity: %s</string>
+    <string name="wind_speed">Wind speed: %s</string>
 </resources>
