@@ -4,7 +4,7 @@ Project of Android application that show basic weather information for the follo
 
 ## Setup Instruction
 In order to run the application you have to follow these steps:
-* Clone the entire project from branch master usign GIT.
+* Clone the entire project from branch main usign GIT.
 * Open the project usign the Android Studio IDE.
 * Build the project and run on a phisical device or simulator.
 * Enjoy the app
